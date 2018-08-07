@@ -9,14 +9,16 @@ public class Blocks {
     public String hash;
     public String previousHash;
     private String data;
+    public String userID;
     public Date timeStamp;
     private  int nonce;
 
-    public Blocks(String data, String previousHash){
+
+    public Blocks(String data, String previousHash, String userID){
         this.data = data;
         this.previousHash = previousHash;
+        this.userID = userID;
         this.timeStamp = new java.util.Date();
-
         this.hash = calculateHash();
     }
 
@@ -38,5 +40,6 @@ public class Blocks {
         }
         PostgreSQL.BlockToDB(this);
         System.out.println("Block Minded: " + hash);
+        PostgreSQL.setLastHash(this);
     }
 }

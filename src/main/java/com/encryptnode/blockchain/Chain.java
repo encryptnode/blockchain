@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Chain {
 
     public static LinkedList<Blocks> blockchain = new LinkedList<>();
-    public static int difficulty = 5;
+    public static int difficulty = 6;
 
 
     public static Boolean isChainValid() {
