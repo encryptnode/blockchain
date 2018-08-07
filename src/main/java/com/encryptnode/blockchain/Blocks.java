@@ -1,6 +1,6 @@
-package com.encryptnode.blockchain.models;
+package com.encryptnode.blockchain;
 
-import com.sun.deploy.util.StringUtils;
+import com.encryptnode.blockchain.dbController.PostgreSQL;
 
 import java.util.Date;
 
@@ -9,13 +9,13 @@ public class Blocks {
     public String hash;
     public String previousHash;
     private String data;
-    private long timeStamp;
+    public Date timeStamp;
     private  int nonce;
 
     public Blocks(String data, String previousHash){
         this.data = data;
         this.previousHash = previousHash;
-        this.timeStamp = new Date().getTime();
+        this.timeStamp = new java.util.Date();
 
         this.hash = calculateHash();
     }
@@ -23,7 +23,7 @@ public class Blocks {
     public String calculateHash(){
         String calculatedHash = Hashing.applySha256(
                 previousHash +
-                        Long.toString(timeStamp) +
+                        timeStamp +
                         Integer.toString(nonce) +
                         data
         );
@@ -36,6 +36,7 @@ public class Blocks {
             nonce ++;
             hash = calculateHash();
         }
+        PostgreSQL.BlockToDB(this);
         System.out.println("Block Minded: " + hash);
     }
 }
