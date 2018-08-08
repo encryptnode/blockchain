@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class userInput {
 
-    public static String getUserID(){
+    public static int getUserID(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter your username: ");
         String userID = scanner.next();
 
-        PostgreSQL.checkForUser(userID);
+        int ID = PostgreSQL.checkForUser(userID);
 
-        return userID;
+        return ID;
     }
 }
