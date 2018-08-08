@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String ID = userInput.getUserID();
+        int ID = userInput.getUserID();
 
         String lasthash = PostgreSQL.getLastHash();
         blockchain.add(new Blocks("Hi im the first block", lasthash, ID));

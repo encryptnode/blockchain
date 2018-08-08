@@ -10,20 +10,21 @@ import java.util.concurrent.TimeUnit;
 
 
 public class PostgreSQL {
+    public static String DB_URL = "jdbc:postgresql://ec2-54-225-76-201.compute-1.amazonaws.com:5432/d8imvua4k1tucn?user=rzlajnimzpnjuo&password=4acb3fc818ed2c08307d953cd531e71f7069eb9ffcd79715c559a5dc6df39508&sslmode=require";
+
     public static void BlockToDB(Blocks block) {
-        String inputInfo = "'" + block.hash + "', '" + block.previousHash + "', '" + block.timeStamp + "'";
+        String inputInfo = "'" + block.userID + "', '" + block.hash + "', '" + block.previousHash + "', '" + block.timeStamp + "'";
         Connection c = null;
         Statement stmt = null;
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/encryptnode",
-                            "tyler", "123");
+                    .getConnection(DB_URL);
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
 
-            String sql = "INSERT INTO blocks (block_hash, prev_hash, time_stamp) "
+            String sql = "INSERT INTO blocks (user_id, block_hash, prev_hash, time_stamp) "
                     + "VALUES (" + inputInfo + ");";
             stmt.executeUpdate(sql);
 
@@ -44,8 +45,7 @@ public class PostgreSQL {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/encryptnode",
-                            "tyler", "123");
+                    .getConnection(DB_URL);
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
@@ -74,10 +74,9 @@ public class PostgreSQL {
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/encryptnode",
-                            "tyler", "123");
+                    .getConnection(DB_URL);
+
             c.setAutoCommit(false);
-            System.out.println("Opened database!");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM last;");
@@ -87,7 +86,6 @@ public class PostgreSQL {
             rs.close();
             stmt.close();
             c.close();
-            System.out.println("Closed conection database!");
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -98,16 +96,16 @@ public class PostgreSQL {
         return lastHash;
     }
 
-    public static String checkForUser(String input){
+    public static int checkForUser(String input){
         Connection c = null;
         Statement stmt = null;
         String userName = null;
+        int userID = 0;
 
         try {
             Class.forName("org.postgresql.Driver");
             c = DriverManager
-                    .getConnection("jdbc:postgresql://localhost:5432/encryptnode",
-                            "tyler", "123");
+                    .getConnection(DB_URL);
             c.setAutoCommit(false);
 
             System.out.print("checking for user");
@@ -123,6 +121,8 @@ public class PostgreSQL {
             ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + input + "';");
             while(rs.next()){
                 userName = rs.getString("username");
+                userID = rs.getInt("user_id");
+
             }
 
             rs.close();
@@ -143,7 +143,7 @@ public class PostgreSQL {
             System.out.println("Login Successful! Happy mining!");
 
         }
-        return userName;
+        return userID;
     }
 
 

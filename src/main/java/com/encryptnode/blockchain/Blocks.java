@@ -9,12 +9,12 @@ public class Blocks {
     public String hash;
     public String previousHash;
     private String data;
-    public String userID;
+    public int userID;
     public Date timeStamp;
     private  int nonce;
 
 
-    public Blocks(String data, String previousHash, String userID){
+    public Blocks(String data, String previousHash, int userID){
         this.data = data;
         this.previousHash = previousHash;
         this.userID = userID;
