@@ -39,7 +39,7 @@ public class Blocks {
             hash = calculateHash();
         }
         PostgreSQL.BlockToDB(this);
-        System.out.println("Block Minded: " + hash);
+        System.out.println("Block Mined: " + hash);
         PostgreSQL.setLastHash(this);
     }
 }

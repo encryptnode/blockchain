@@ -26,8 +26,7 @@ public class Main {
             blockchain.get(i).mineBlock(difficulty);
             System.out.println("\nBlockchain is Valid: " + isChainValid());
 //            String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
-            System.out.println("\nThe block chain: ");
-//        System.out.println(blockchainJson);
+//            System.out.println(blockchainJson);
 
 
 
