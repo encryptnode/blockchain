@@ -2,19 +2,16 @@
 
 EncryptNode miner is an application used to mine blocks on the EncryptNode blockchain.
 
-## Instructions
+To get started, visit [www.encryptnode.com]() to create an account, download the miner, and start mining!
 
-Open your terminal and ``cd`` into your desired directory.
+if you would rather compile the source code for the miner your self
 
-Instructions for use:
+cd into desired directory:
 
-Clone:
-``git clone github.com/encryptnode/blockchain.git``
+``cd user/examlpe/directory``
 
-cd:
-``cd blockchain``
+git clone:
 
-Run:
-``java -jar blockchain.jar``
+``git clone https://github.com/encryptnode/blockchain.git``
 
-You will then be asked for your user name. If you have not created an account please visit [encryptnode](www.encryptnode.com) to sign up.
+Start new gradle project in directory with your desired IED and compile.

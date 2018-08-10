@@ -135,7 +135,7 @@ public class PostgreSQL {
 
         if(userName == null){
             System.out.println("No account matching that name");
-            System.out.println("Please try again");
+            System.out.println("Please try again...");
             System.out.println("if you have not made an account, please visit:");
             System.out.println("www.encryptnode.com");
             System.exit(0);
